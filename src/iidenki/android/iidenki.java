@@ -18,7 +18,6 @@ public class iidenki extends Activity implements OnClickListener {
 	    
 	    Button vocabbutton = (Button) findViewById(R.id.button1);
     	vocabbutton.setOnClickListener(this);
-
 	}
 
 	@Override

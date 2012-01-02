@@ -7,7 +7,7 @@
 		android:layout_height="wrap_content" android:text="Translate the following word into Japanese" />
 
 	<TextView android:id="@+id/textView2" android:layout_width="fill_parent"
-		android:layout_height="0dp" android:layout_weight="1" android:text="car"
+		android:layout_height="0dp" android:layout_weight="1" android:text="---"
 		android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
