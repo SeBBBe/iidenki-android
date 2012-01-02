@@ -17,16 +17,6 @@ public class iidenki extends Activity implements OnClickListener {
 	    setContentView(R.layout.mainmenu);
 	    
 	    Button vocabbutton = (Button) findViewById(R.id.button1);
-	    
-//	    vocabbutton.setOnClickListener(new OnClickListener() {
-//	        public void onClick(View view) {
-//	        	Intent intent = new Intent(Intent.ACTION_VIEW);
-//	        	intent.setClassName(this, WordTester.class.getName());
-//	        	startActivity(intent);
-//	          //Toast.makeText(getApplicationContext(), "Hello!", Toast.LENGTH_SHORT).show();
-//	        }
-//	      });
-    	
     	vocabbutton.setOnClickListener(this);
 
 	}

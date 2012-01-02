@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">iidenki</string>
+    <string name="noun">Noun</string>
 
+    <string-array name="word_classes">
+	<item>noun</item>
+	<item>ru-verb</item>	
+	<item>u-verb</item>
+	<item>irregular verb</item>
+	<item>i-adjective</item>
+	<item>na-adjective</item>
+	</string-array>
 </resources>

@@ -1,103 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#190219"
-    android:orientation="vertical" >
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="#190219" android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Translate the following word into Japanese" />
+	<TextView android:id="@+id/textView1" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="Translate the following word into Japanese" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="car"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+	<TextView android:id="@+id/textView2" android:layout_width="fill_parent"
+		android:layout_height="0dp" android:layout_weight="1" android:text="car"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
+		<EditText android:id="@+id/editText1" android:layout_width="0dp"
+			android:layout_height="wrap_content" android:layout_weight="1">
 
-            <requestFocus />
-        </EditText>
+			<requestFocus />
+		</EditText>
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK" />
-    </LinearLayout>
+		<Button android:id="@+id/button1" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="OK" />
+	</LinearLayout>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Noun" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="i-adjective" />
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="na-adjective" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ru-verb" />
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="u-verb" />
-
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="irregular verb" />
-    </LinearLayout>
-
-    
+	<Spinner
+	    android:id="@+id/spinner1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" />
 
 </LinearLayout>
