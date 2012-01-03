@@ -14,6 +14,7 @@ import iidenki.android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -36,6 +37,7 @@ public class WordTester extends Activity implements OnClickListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.vocabtest);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    correct = 0;
 	    total = 0;
 	    boolean error = false;
@@ -62,7 +64,10 @@ public class WordTester extends Activity implements OnClickListener{
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
 			temp =(ArrayList<Word>)in.readObject();
 		}catch(Exception e){
-			Toast.makeText(getApplicationContext(), "File read error", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "You need to select an iidenki vocabulary list file", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Download such a file or create one using iidenki on your computer", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "then place it on the root of your phone memory card", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			finish();
 			error = true;

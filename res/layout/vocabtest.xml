@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#190219"
-    android:orientation="vertical"
-    android:screenOrientation="portrait" >
+    android:background="#250525"
+    android:orientation="vertical" 
+    android:screenOrientation="portrait">
 
     <TextView
         android:id="@+id/textView1"
