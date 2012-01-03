@@ -11,4 +11,10 @@
 	<item>i-adjective</item>
 	<item>na-adjective</item>
 	</string-array>
+	
+    <string-array name="vocab_test_types">
+	<item>Test all words</item>
+	<item>Test the most difficult words</item>	
+	<item>Test the latest words</item>
+	</string-array>
 </resources>
