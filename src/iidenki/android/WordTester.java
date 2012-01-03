@@ -38,6 +38,7 @@ public class WordTester extends Activity implements OnClickListener{
 	    setContentView(R.layout.vocabtest);
 	    correct = 0;
 	    total = 0;
+	    boolean error = false;
 	    
 	    String fil = getIntent().getStringExtra("file");
 	    String testtype = getIntent().getStringExtra("test type");
@@ -64,23 +65,26 @@ public class WordTester extends Activity implements OnClickListener{
 			Toast.makeText(getApplicationContext(), "File read error", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			finish();
+			error = true;
 		}
     	
-    	if (reset.equals("true")){
-    		resetList(temp);
+    	if (!error){
+	    	if (reset.equals("true")){
+	    		resetList(temp);
+	    	}
+	    	
+	    	if (testtype.equals("Test all words")){
+	    		test = new SimpleTest<Word>(temp);
+	    	}
+	    	if (testtype.equals("Test the most difficult words")){
+	    		test = new DynamicTest<Word>(temp, num);
+	    	}
+	    	if (testtype.equals("Test the latest words")){
+	    		test = new LatestTest<Word>(temp, num);
+	    	}
+	    	
+	    	chooseWord();
     	}
-    	
-    	if (testtype.equals("Test all words")){
-    		test = new SimpleTest<Word>(temp);
-    	}
-    	if (testtype.equals("Test the most difficult words")){
-    		test = new DynamicTest<Word>(temp, num);
-    	}
-    	if (testtype.equals("Test the latest words")){
-    		test = new LatestTest<Word>(temp, num);
-    	}
-    	
-    	chooseWord();
 	}
 
 	private void chooseWord() {
