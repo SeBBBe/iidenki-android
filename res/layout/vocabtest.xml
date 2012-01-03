@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#190219" android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#190219"
+    android:orientation="vertical" >
 
-	<TextView android:id="@+id/textView1" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="Translate the following word into Japanese" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Translate the following word into Japanese" />
 
-	<TextView android:id="@+id/textView2" android:layout_width="fill_parent"
-		android:layout_height="0dp" android:layout_weight="1" android:text="---"
-		android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="---"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<EditText android:id="@+id/editText1" android:layout_width="0dp"
-			android:layout_height="wrap_content" android:layout_weight="1">
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
 
-			<requestFocus />
-		</EditText>
+            <requestFocus />
+        </EditText>
 
-		<Button android:id="@+id/button1" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="OK" />
-	</LinearLayout>
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK" />
+    </LinearLayout>
 
-	<Spinner
-	    android:id="@+id/spinner1"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

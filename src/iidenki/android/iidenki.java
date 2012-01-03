@@ -23,7 +23,7 @@ public class iidenki extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setClassName(this, WordTester.class.getName());
+		intent.setClassName(this, FileLoader.class.getName());
 		startActivity(intent);
 	}
 }

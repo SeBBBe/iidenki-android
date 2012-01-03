@@ -10,7 +10,6 @@ import vocab.Word;
 import iidenki.android.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -29,6 +28,8 @@ public class WordTester extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.vocabtest);
 	    
+	    String fil = getIntent().getStringExtra("file");
+	    
 	    Button okbutton = (Button) findViewById(R.id.button1);
     	okbutton.setOnClickListener(this);
     	
@@ -37,8 +38,7 @@ public class WordTester extends Activity implements OnClickListener{
     	Spinner s = (Spinner) findViewById(R.id.spinner1);
     	s.setAdapter(adapter);
     	
-    	File root = Environment.getExternalStorageDirectory(); //fetch the external storage dir
-    	File readfrom = new File(root.toString() + "/words");
+    	File readfrom = new File(fil);
     	
     	try{
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
@@ -47,9 +47,8 @@ public class WordTester extends Activity implements OnClickListener{
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), "File read error", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
+			finish();
 		}
-    	
-    	Toast.makeText(getApplicationContext(), readfrom.toString(), Toast.LENGTH_SHORT).show();
     	
     	chooseWord();
 	}
@@ -72,9 +71,12 @@ public class WordTester extends Activity implements OnClickListener{
 		
 		if (currentword.check(answer, wordclass, true)){
 			Toast.makeText(getApplicationContext(), "correct!", Toast.LENGTH_SHORT).show();
+			test.success();
 		}else{
 			Toast.makeText(getApplicationContext(), "wrong!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "correct answer: " + currentword.getRomaji(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "word class: " + currentword.type, Toast.LENGTH_SHORT).show();
+			test.fail();
 		}
 		
 		chooseWord();
