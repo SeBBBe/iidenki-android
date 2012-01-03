@@ -13,7 +13,9 @@
         <activity android:name="iidenki">
             <intent-filter><category android:name="android.intent.category.LAUNCHER" /><action android:name="android.intent.action.MAIN" /></intent-filter>
         </activity>
-        <activity android:name="WordTester"></activity>
+        <activity android:name=".WordTester"></activity>
+        <activity android:name="FileLoader"></activity>
+        <activity android:name="WordTestMenu"></activity>
     </application>
 
 </manifest>
