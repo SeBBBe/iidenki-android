@@ -1,22 +1,21 @@
 package iidenki.android;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
+import vocab.SimpleTest;
+import vocab.Tester;
+import vocab.Word;
 import iidenki.android.R;
-import iidenki.android.system.SimpleTest;
-import iidenki.android.system.Tester;
-import iidenki.android.system.Word;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +37,19 @@ public class WordTester extends Activity implements OnClickListener{
     	Spinner s = (Spinner) findViewById(R.id.spinner1);
     	s.setAdapter(adapter);
     	
-    	ArrayList<Word> temp = new ArrayList<Word>();
-    	temp.add(new Word("car","kuruma","",""));
-    	temp.add(new Word("fish","sakana","",""));
-    	temp.add(new Word("rice","gohan","",""));
-    	temp.add(new Word("desk","tsukue","",""));
-    	temp.add(new Word("chair","isu","",""));
-    	test = new SimpleTest<Word>(temp);
+    	File root = Environment.getExternalStorageDirectory(); //fetch the external storage dir
+    	File readfrom = new File(root.toString() + "/words");
+    	
+    	try{
+			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ArrayList<Word> temp =(ArrayList<Word>)in.readObject();
+			test = new SimpleTest<Word>(temp);
+		}catch(Exception e){
+			Toast.makeText(getApplicationContext(), "File read error", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+    	
+    	Toast.makeText(getApplicationContext(), readfrom.toString(), Toast.LENGTH_SHORT).show();
     	
     	chooseWord();
 	}
