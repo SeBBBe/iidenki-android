@@ -52,6 +52,7 @@ public class WordTestMenu extends Activity implements OnClickListener{
 		intent.putExtra("test word class",wordclass);
 		intent.putExtra("reset list",reset);
 		intent.putExtra("number",num);
+		intent.putExtra("next", "WordTester");
 		startActivity(intent);
 		finish();
 	}

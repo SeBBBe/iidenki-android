@@ -16,17 +16,27 @@ public class iidenki extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.mainmenu);
 	    
-	    Button vocabbutton = (Button) findViewById(R.id.button1);
-    	vocabbutton.setOnClickListener(this);
+	    Button b = (Button) findViewById(R.id.button1);
+    	b.setOnClickListener(this);
+    	b = (Button) findViewById(R.id.button3);
+    	b.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-//		Intent intent = new Intent(Intent.ACTION_VIEW);
-//		intent.setClassName(this, FileLoader.class.getName());
-//		startActivity(intent);
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setClassName(this, WordTestMenu.class.getName());
-		startActivity(intent);
+		Button src = (Button)v;
+		Button vocabbutton = (Button) findViewById(R.id.button1);
+		Button hangmanbutton = (Button) findViewById(R.id.button3);
+		if (src == vocabbutton){
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, WordTestMenu.class.getName());
+			startActivity(intent);
+		}
+		if (src == hangmanbutton){
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, FileLoader.class.getName());
+			intent.putExtra("next","Hangman");
+			startActivity(intent);
+		}
 	}
 }
