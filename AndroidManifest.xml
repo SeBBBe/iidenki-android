@@ -17,6 +17,7 @@
         <activity android:name="FileLoader"></activity>
         <activity android:name="WordTestMenu"></activity>
         <activity android:name="Hangman"></activity>
+        <activity android:name="KanjiTester"></activity>
     </application>
 
 </manifest>
