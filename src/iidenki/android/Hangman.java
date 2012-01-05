@@ -109,6 +109,7 @@ public class Hangman extends Activity implements OnClickListener{
 			case 9: img.setImageResource(R.drawable.hangman9); break;
 			case 10: img.setImageResource(R.drawable.hangman10); 
 						disableInput();
+						Toast.makeText(getApplicationContext(), "The word was " + gh.word(), Toast.LENGTH_SHORT).show();
 						break;
 		}
 	}
