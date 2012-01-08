@@ -12,27 +12,27 @@
         android:layout_weight="1" >
 
         <TextView
-            android:id="@+id/TextView03"
+            android:id="@+id/rain04"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="電気"
+            android:text="天気"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/TextView02"
+            android:id="@+id/rain03"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="電気"
+            android:text="先生"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/TextView01"
+            android:id="@+id/rain02"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="電気"
+            android:text="車"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView

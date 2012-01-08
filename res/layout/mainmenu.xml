@@ -15,19 +15,19 @@
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Vocabulary test" />
+        android:text="Vocabulary quiz" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Kanji test" />
+        android:text="Kanji rain" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hangman" />
+        android:text="Kana hangman" />
 
     <TextView
         android:id="@+id/textView1"
