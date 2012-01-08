@@ -17,4 +17,10 @@
 	<item>Test the most difficult words</item>	
 	<item>Test the latest words</item>
 	</string-array>
+	
+    <string-array name="kanji_test_types">
+	<item>Test all kanji</item>
+	<item>Test the most difficult kanji</item>	
+	<item>Test the latest kanji</item>
+	</string-array>
 </resources>

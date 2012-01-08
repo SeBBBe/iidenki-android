@@ -43,7 +43,7 @@ public class iidenki extends Activity implements OnClickListener {
 		}
 		if (src == kanjibutton){
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, KanjiTester.class.getName());
+			intent.setClassName(this, KanjiTestMenu.class.getName());
 			startActivity(intent);
 		}
 	}
