@@ -56,6 +56,9 @@ public class WordTester extends Activity implements OnClickListener{
     	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     	Spinner s = (Spinner) findViewById(R.id.spinner1);
     	s.setAdapter(adapter);
+    	if (!wc){
+    		s.setVisibility(View.INVISIBLE);
+    	}
     	
     	File readfrom = new File(fil);
     	ArrayList<Word> temp = null;
