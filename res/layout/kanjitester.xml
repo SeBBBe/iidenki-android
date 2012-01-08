@@ -12,74 +12,57 @@
         android:layout_weight="1" >
 
         <TextView
-            android:id="@+id/rain08"
-            android:layout_width="wrap_content"
+            android:id="@+id/TextView03"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="電気"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/rain07"
-            android:layout_width="wrap_content"
+            android:id="@+id/TextView02"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="電気"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/rain06"
-            android:layout_width="wrap_content"
+            android:id="@+id/TextView01"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="電気"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/rain05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="電気"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/rain04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="電気"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/rain03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="電気"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/rain02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="電気"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/rain01"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="電気"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="touch the kanji (compound) that means"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="electricity"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="touch the kanji (compound) that means"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="electricity"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
 
 </LinearLayout>

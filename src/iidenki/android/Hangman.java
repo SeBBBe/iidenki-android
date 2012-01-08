@@ -91,6 +91,7 @@ public class Hangman extends Activity implements OnClickListener{
 	    String p = gh.partialText();
 		if (!p.contains("_")){
 			Toast.makeText(getApplicationContext(), "Congratulations!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), gh.word() + " means " + gh.meaning(), Toast.LENGTH_SHORT).show();
 			disableInput();
 		}
 	}

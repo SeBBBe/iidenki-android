@@ -78,6 +78,10 @@ public class GameHandler {
 	public String word(){
 		return currentword.getKana();
 	}
+	
+	public String meaning(){
+		return currentword.toString();
+	}
 
 	public Object winText() {
 		return "Congratulations!\nThe word was\n" + currentword.getKana() + "\nwhich means\n" + currentword;
