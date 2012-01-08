@@ -32,11 +32,20 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 	  File root = Environment.getExternalStorageDirectory(); //fetch the external storage dir
 	  File[] listOfFiles = root.listFiles();
 
-	  setListAdapter(new ArrayAdapter<File>(this, R.layout.list_item, listOfFiles));
+	  boolean error = false;
+	  try{
+		  setListAdapter(new ArrayAdapter<File>(this, R.layout.list_item, listOfFiles));
+	  }catch (Exception e){
+			Toast.makeText(getApplicationContext(), "You need to insert an SD card to load files!", Toast.LENGTH_SHORT).show();
+			error = true;
+			finish();
+	  }
 
-	  ListView lv = getListView();
-	  lv.setTextFilterEnabled(true);
-	  lv.setOnItemClickListener(this);
+	  if (!error){
+		  ListView lv = getListView();
+		  lv.setTextFilterEnabled(true);
+		  lv.setOnItemClickListener(this);
+	  }
 	}
 	
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {

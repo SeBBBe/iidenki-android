@@ -92,12 +92,18 @@ public class KanjiTester extends Activity implements OnClickListener{
 
 	private void newRound() {
 		currentkanji = test.getNext();
-		TextView word = (TextView) findViewById(R.id.textView1);
-		word.setText(currentkanji.translation);
-		startAnimation(R.id.rain01);
- 	    startAnimation(R.id.rain02);
- 	    startAnimation(R.id.rain03);
- 	    startAnimation(R.id.rain04);
+		if (currentkanji == null){
+			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
+			finish();
+		}else{
+			TextView word = (TextView) findViewById(R.id.textView1);
+			word.setText(currentkanji.translation);
+			startAnimation(R.id.rain01);
+	 	    startAnimation(R.id.rain02);
+	 	    startAnimation(R.id.rain03);
+	 	    startAnimation(R.id.rain04);
+		}
 	}
 
 	private void startAnimation(int v){
@@ -149,7 +155,19 @@ public class KanjiTester extends Activity implements OnClickListener{
 	 * Item clicked
 	 */
 	public void onClick(View arg0) {
-		Toast.makeText(getApplicationContext(), ((TextView)arg0).getText(), Toast.LENGTH_SHORT).show();
+		String answer = (String) ((TextView)arg0).getText();
+		
+		if (currentkanji.check(answer)){
+			Toast.makeText(getApplicationContext(), "correct!", Toast.LENGTH_SHORT).show();
+			test.success();
+			correct++;
+			total++;
+			newRound();
+		}else{
+			Toast.makeText(getApplicationContext(), "wrong!", Toast.LENGTH_SHORT).show();
+			test.fail();
+			total++;
+		}
 	}
 	
 	/**
