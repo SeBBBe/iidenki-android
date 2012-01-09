@@ -37,8 +37,7 @@ public class WordTester extends Activity implements OnClickListener{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Display display = getWindowManager().getDefaultDisplay();
-		setRequestedOrientation(display.getOrientation());
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    setContentView(R.layout.vocabtest);
 	    correct = 0;
 	    total = 0;

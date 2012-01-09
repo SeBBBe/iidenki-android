@@ -40,11 +40,11 @@ public class KanjiTester extends Activity implements OnClickListener{
 	private ArrayList<Kanji> list; 
 	private int correct;
 	private int total;
+	private double speed;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Display display = getWindowManager().getDefaultDisplay();
-		setRequestedOrientation(display.getOrientation());
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    setContentView(R.layout.kanjitester);
 	    setClickListener();
 	    
@@ -56,6 +56,8 @@ public class KanjiTester extends Activity implements OnClickListener{
 	    String testtype = getIntent().getStringExtra("test type");
 		String reset = getIntent().getStringExtra("reset list");
 		String num = getIntent().getStringExtra("number");
+		int s1 = Integer.parseInt(getIntent().getStringExtra("speed"));
+		speed = s1 / 30.0 + 1;
     	
     	File readfrom = new File(fil);
     	list = null;
@@ -125,7 +127,9 @@ public class KanjiTester extends Activity implements OnClickListener{
 		
 		Random rand = new Random();
 	    ta = new TranslateAnimation(0, 0, 0, y);
-	    ta.setDuration(3000 + rand.nextInt(3000));
+	    double factor = (1.0/speed) * 6000;
+	    
+	    ta.setDuration((int)factor + rand.nextInt((int)factor));
 	    ta.setFillAfter(true);
 	    
 	    ta.setAnimationListener(new AnimListen(this, v));

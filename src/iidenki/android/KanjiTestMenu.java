@@ -10,10 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class KanjiTestMenu extends Activity implements OnClickListener{
 	
+	private int speed;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,6 +32,10 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
     	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     	Spinner s = (Spinner) findViewById(R.id.spinner1);
     	s.setAdapter(adapter);
+    	SeekBar sb = (SeekBar) findViewById(R.id.seekBar1);
+    	sb.setOnSeekBarChangeListener(new SeekListen(this));
+    	sb.setProgress(50);
+    	speed = 50;
 	}
 	
 	/**
@@ -46,8 +54,46 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
 		intent.putExtra("test type",testtype);
 		intent.putExtra("reset list",reset);
 		intent.putExtra("number",num);
+		intent.putExtra("speed",speed + "");
 		intent.putExtra("next", "KanjiTester");
 		startActivity(intent);
 		finish();
+	}
+	
+	private class SeekListen implements OnSeekBarChangeListener{
+		
+		private KanjiTestMenu k;
+		public SeekListen(KanjiTestMenu k){
+			this.k = k;
+		}
+
+		public void onProgressChanged(SeekBar arg0, int value, boolean arg2) {
+			k.speed = value;
+			TextView text = (TextView) k.findViewById(R.id.textView3);
+			String denom = "medium";
+			if (value < 20){
+				denom = "very slow";
+			}else if (value < 40){
+				denom = "quite slow";
+			}else if (value > 80){
+				denom = "very speedy";
+			}else if (value > 60){
+				denom = "respectably speedy";
+			}
+			text.setText("Speed: " + denom);
+		}
+
+		@Override
+		public void onStartTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onStopTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

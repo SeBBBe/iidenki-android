@@ -76,6 +76,7 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 			String testtype = getIntent().getStringExtra("test type");
 			String reset = getIntent().getStringExtra("reset list");
 			String num = getIntent().getStringExtra("number");
+			String speed = getIntent().getStringExtra("speed");
 			
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setClassName(this, KanjiTester.class.getName());
@@ -83,6 +84,7 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 		    intent.putExtra("test type",testtype);
 			intent.putExtra("reset list",reset);
 			intent.putExtra("number",num);
+			intent.putExtra("speed",speed);
 			startActivity(intent);
 			finish();
 		}else if(next.equals("KanjiViewer")){
