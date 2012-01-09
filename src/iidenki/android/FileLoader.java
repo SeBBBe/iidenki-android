@@ -85,6 +85,12 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 			intent.putExtra("number",num);
 			startActivity(intent);
 			finish();
+		}else if(next.equals("KanjiViewer")){
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, KanjiViewer.class.getName());
+		    intent.putExtra("file",fil);
+			startActivity(intent);
+			finish();
 		}
 	}
 }

@@ -19,6 +19,7 @@
         <activity android:name="Hangman"></activity>
         <activity android:name="KanjiTester"></activity>
         <activity android:name="KanjiTestMenu"></activity>
+        <activity android:name="KanjiViewer"></activity>
     </application>
 
 </manifest>

@@ -22,6 +22,8 @@ public class iidenki extends Activity implements OnClickListener {
     	b.setOnClickListener(this);
     	b = (Button) findViewById(R.id.button2);
     	b.setOnClickListener(this);
+    	b = (Button) findViewById(R.id.button4);
+    	b.setOnClickListener(this);
 	}
 
 	@Override
@@ -30,6 +32,7 @@ public class iidenki extends Activity implements OnClickListener {
 		Button vocabbutton = (Button) findViewById(R.id.button1);
 		Button kanjibutton = (Button) findViewById(R.id.button2);
 		Button hangmanbutton = (Button) findViewById(R.id.button3);
+		Button kanjiviewbutton = (Button) findViewById(R.id.button4);
 		if (src == vocabbutton){
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setClassName(this, WordTestMenu.class.getName());
@@ -44,6 +47,12 @@ public class iidenki extends Activity implements OnClickListener {
 		if (src == kanjibutton){
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setClassName(this, KanjiTestMenu.class.getName());
+			startActivity(intent);
+		}
+		if (src == kanjiviewbutton){
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, FileLoader.class.getName());
+			intent.putExtra("next","KanjiViewer");
 			startActivity(intent);
 		}
 	}

@@ -33,7 +33,9 @@ public final class R {
         public static final int button1=0x7f060006;
         public static final int button2=0x7f06000e;
         public static final int button3=0x7f06000f;
-        public static final int checkBox1=0x7f060010;
+        public static final int button4=0x7f060010;
+        public static final int button5=0x7f060011;
+        public static final int checkBox1=0x7f060012;
         public static final int checkBox2=0x7f06000d;
         public static final int editText1=0x7f060005;
         public static final int imageView1=0x7f060000;
