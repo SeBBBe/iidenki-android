@@ -15,6 +15,7 @@ import vocab.Word;
 
 import iidenki.android.R;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -42,6 +43,8 @@ public class KanjiTester extends Activity implements OnClickListener{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Display display = getWindowManager().getDefaultDisplay();
+		setRequestedOrientation(display.getOrientation());
 	    setContentView(R.layout.kanjitester);
 	    setClickListener();
 	    

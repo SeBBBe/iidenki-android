@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,8 @@ public class WordTester extends Activity implements OnClickListener{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		Display display = getWindowManager().getDefaultDisplay();
+		setRequestedOrientation(display.getOrientation());
 	    setContentView(R.layout.vocabtest);
 	    correct = 0;
 	    total = 0;
