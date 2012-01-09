@@ -91,6 +91,13 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 		    intent.putExtra("file",fil);
 			startActivity(intent);
 			finish();
+		}else if(next.equals("WordViewer")){
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, WordViewer.class.getName());
+		    intent.putExtra("file",fil);
+			startActivity(intent);
+			finish();
 		}
+		
 	}
 }
