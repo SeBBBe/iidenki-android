@@ -21,6 +21,7 @@
         <activity android:name="KanjiTestMenu"></activity>
         <activity android:name="KanjiViewer"></activity>
         <activity android:name="WordViewer"></activity>
+        <activity android:name="KanjiWriter"></activity>
     </application>
 
 </manifest>
