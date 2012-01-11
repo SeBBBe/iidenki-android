@@ -2,7 +2,9 @@ package iidenki.android;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import vocab.DynamicTest;
@@ -17,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +37,8 @@ public class WordTester extends Activity implements OnClickListener{
 	private int correct;
 	private int total;
 	private boolean wc;
+	private File readfrom;
+	private ArrayList<Word> list;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,12 +66,13 @@ public class WordTester extends Activity implements OnClickListener{
     		s.setVisibility(View.INVISIBLE);
     	}
     	
-    	File readfrom = new File(fil);
-    	ArrayList<Word> temp = null;
+    	readfrom = new File(fil);
+    	list = null;
     	
     	try{
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
-			temp =(ArrayList<Word>)in.readObject();
+			list =(ArrayList<Word>)in.readObject();
+			in.close();
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "You need to select an iidenki vocabulary list file", Toast.LENGTH_SHORT).show();
@@ -79,17 +85,17 @@ public class WordTester extends Activity implements OnClickListener{
     	
     	if (!error){
 	    	if (reset.equals("true")){
-	    		resetList(temp);
+	    		resetList(list);
 	    	}
 	    	
 	    	if (testtype.equals("Test all words")){
-	    		test = new SimpleTest<Word>(temp);
+	    		test = new SimpleTest<Word>(list);
 	    	}
 	    	if (testtype.equals("Test the most difficult words")){
-	    		test = new DynamicTest<Word>(temp, num);
+	    		test = new DynamicTest<Word>(list, num);
 	    	}
 	    	if (testtype.equals("Test the latest words")){
-	    		test = new LatestTest<Word>(temp, num);
+	    		test = new LatestTest<Word>(list, num);
 	    	}
 	    	
 	    	chooseWord();
@@ -101,6 +107,13 @@ public class WordTester extends Activity implements OnClickListener{
 		EditText textbox = (EditText) findViewById(R.id.editText1);
 		currentword = test.getNext();
 		if (currentword == null){
+			try{
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(readfrom));
+				out.writeObject(list);
+			}catch(Exception f){
+				Log.e("", "", f);
+				Toast.makeText(getApplicationContext(), "File error! Scores not saved.", Toast.LENGTH_SHORT).show();
+			}
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
 			finish();

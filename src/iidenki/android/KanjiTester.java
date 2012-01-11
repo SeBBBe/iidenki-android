@@ -2,33 +2,29 @@ package iidenki.android;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
-
 import vocab.DynamicTest;
 import vocab.Kanji;
 import vocab.LatestTest;
 import vocab.SimpleTest;
 import vocab.Tester;
 import vocab.Word;
-
 import iidenki.android.R;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +37,7 @@ public class KanjiTester extends Activity implements OnClickListener{
 	private int correct;
 	private int total;
 	private double speed;
+	private File readfrom;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,12 +56,13 @@ public class KanjiTester extends Activity implements OnClickListener{
 		int s1 = Integer.parseInt(getIntent().getStringExtra("speed"));
 		speed = s1 / 30.0 + 1;
     	
-    	File readfrom = new File(fil);
+    	readfrom = new File(fil);
     	list = null;
     	
     	try{
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
 			list =(ArrayList<Kanji>)in.readObject();
+			in.close();
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "You need to select an iidenki kanji list file", Toast.LENGTH_SHORT).show();
@@ -98,6 +96,13 @@ public class KanjiTester extends Activity implements OnClickListener{
 	private void newRound() {
 		currentkanji = test.getNext();
 		if (currentkanji == null){
+			try{
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(readfrom));
+				out.writeObject(list);
+			}catch(Exception f){
+				Log.e("", "", f);
+				Toast.makeText(getApplicationContext(), "File error! Scores not saved.", Toast.LENGTH_SHORT).show();
+			}
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
 			finish();
