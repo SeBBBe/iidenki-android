@@ -18,6 +18,8 @@ import vocab.Word;
 
 import iidenki.android.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -45,7 +47,6 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    setContentView(R.layout.kanjiwriter);
-	    currentkanji = new Kanji("temp");
 	    
 	    String fil = getIntent().getStringExtra("file");
 	    String testtype = getIntent().getStringExtra("test type");
@@ -88,14 +89,23 @@ public class KanjiWriter extends Activity implements OnClickListener{
     	b.setOnClickListener(this);
     	b = (Button) findViewById(R.id.button2);
     	b.setOnClickListener(this);
+    	b = (Button) findViewById(R.id.button3);
+    	b.setOnClickListener(this);
 	    
 	    run();
 	    newRound();
 	}
 	
 	private void newRound() {
+		currentkanji = new Kanji("temp");
+		int i = 0;
 		while (currentkanji.toString().length() != 1){
 			currentkanji = test.getNext();
+			i++;
+			if (i > list.size()){
+				currentkanji = null;
+				break;
+			}
 		}
 		
 		if (currentkanji == null){
@@ -136,6 +146,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		Button src = (Button)arg0;
 		
 		Button donebutton = (Button) findViewById(R.id.button1);
+		Button skipbutton = (Button) findViewById(R.id.button3);
 		
 		ViewGroup baseView = (ViewGroup) findViewById(R.id.buttonsArea);
     	baseView.removeAllViews();
@@ -163,6 +174,11 @@ public class KanjiWriter extends Activity implements OnClickListener{
         		
         	}
 		}
+		
+		if (src == skipbutton){
+			newRound();
+		}
+		
 		clearPad();
 	}
 
@@ -185,7 +201,13 @@ public class KanjiWriter extends Activity implements OnClickListener{
 			total++;
 			newRound();
 		}else{
-			Toast.makeText(getApplicationContext(), "wrong! correct answer was " + currentkanji, Toast.LENGTH_SHORT).show();
+			AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setMessage("wrong! the answer was\n" + currentkanji.toString() + "\nreading: " + currentkanji.reading + "\nmeaning: " + currentkanji.translation);
+            alertbox.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface arg0, int arg1) {
+                }
+            });
+            alertbox.show();
 			test.fail();
 			total++;
 			newRound();

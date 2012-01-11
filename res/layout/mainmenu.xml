@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/hangmanButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Kana hangman" />

@@ -20,7 +20,7 @@ public class iidenki extends Activity implements OnClickListener {
 	    
 	    Button b = (Button) findViewById(R.id.button1);
     	b.setOnClickListener(this);
-    	b = (Button) findViewById(R.id.button3);
+    	b = (Button) findViewById(R.id.hangmanButton);
     	b.setOnClickListener(this);
     	b = (Button) findViewById(R.id.button2);
     	b.setOnClickListener(this);
@@ -37,7 +37,7 @@ public class iidenki extends Activity implements OnClickListener {
 		Button src = (Button)v;
 		Button vocabbutton = (Button) findViewById(R.id.button1);
 		Button kanjibutton = (Button) findViewById(R.id.button2);
-		Button hangmanbutton = (Button) findViewById(R.id.button3);
+		Button hangmanbutton = (Button) findViewById(R.id.hangmanButton);
 		Button kanjiviewbutton = (Button) findViewById(R.id.button4);
 		Button wordviewbutton = (Button) findViewById(R.id.button5);
 		Button kanjiwritebutton = (Button) findViewById(R.id.button6);
