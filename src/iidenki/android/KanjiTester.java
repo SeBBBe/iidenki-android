@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
+
+import control.FileManager;
 import vocab.DynamicTest;
 import vocab.Kanji;
 import vocab.LatestTest;
@@ -37,7 +39,7 @@ public class KanjiTester extends Activity implements OnClickListener{
 	private int correct;
 	private int total;
 	private double speed;
-	private File readfrom;
+	private String readfrom;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,11 +58,11 @@ public class KanjiTester extends Activity implements OnClickListener{
 		int s1 = Integer.parseInt(getIntent().getStringExtra("speed"));
 		speed = s1 / 30.0 + 1;
     	
-    	readfrom = new File(fil);
+    	readfrom = fil;
     	list = null;
     	
     	try{
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ObjectInputStream in=FileManager.getInStream(this, readfrom);
 			list =(ArrayList<Kanji>)in.readObject();
 			in.close();
 		}catch(Exception e){
@@ -94,15 +96,14 @@ public class KanjiTester extends Activity implements OnClickListener{
 	}
 
 	private void newRound() {
-		currentkanji = test.getNext();
+		try{
+			currentkanji = test.getNext();
+		}catch(Exception e){
+			Toast.makeText(getApplicationContext(), "Wrong type of file!", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		if (currentkanji == null){
-			try{
-				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(readfrom));
-				out.writeObject(list);
-			}catch(Exception f){
-				Log.e("", "", f);
-				Toast.makeText(getApplicationContext(), "File error! Scores not saved.", Toast.LENGTH_SHORT).show();
-			}
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
 			finish();

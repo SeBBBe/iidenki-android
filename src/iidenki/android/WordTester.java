@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import control.FileManager;
+
 import vocab.DynamicTest;
 import vocab.LatestTest;
 import vocab.SimpleTest;
@@ -37,7 +39,7 @@ public class WordTester extends Activity implements OnClickListener{
 	private int correct;
 	private int total;
 	private boolean wc;
-	private File readfrom;
+	private String readfrom;
 	private ArrayList<Word> list;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,11 +68,11 @@ public class WordTester extends Activity implements OnClickListener{
     		s.setVisibility(View.INVISIBLE);
     	}
     	
-    	readfrom = new File(fil);
+    	readfrom = fil;
     	list = null;
     	
     	try{
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ObjectInputStream in=FileManager.getInStream(this, readfrom);
 			list =(ArrayList<Word>)in.readObject();
 			in.close();
 		}catch(Exception e){
@@ -105,15 +107,14 @@ public class WordTester extends Activity implements OnClickListener{
 	private void chooseWord() {
 		TextView engword = (TextView) findViewById(R.id.textView2);
 		EditText textbox = (EditText) findViewById(R.id.editText1);
-		currentword = test.getNext();
+		try{
+			currentword = test.getNext();
+		}catch(Exception e){
+			Toast.makeText(getApplicationContext(), "Wrong type of file!", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		if (currentword == null){
-			try{
-				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(readfrom));
-				out.writeObject(list);
-			}catch(Exception f){
-				Log.e("", "", f);
-				Toast.makeText(getApplicationContext(), "File error! Scores not saved.", Toast.LENGTH_SHORT).show();
-			}
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
 			finish();

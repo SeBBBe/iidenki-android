@@ -14,7 +14,7 @@
             <intent-filter><category android:name="android.intent.category.LAUNCHER" /><action android:name="android.intent.action.MAIN" /></intent-filter>
         </activity>
         <activity android:name=".WordTester"></activity>
-        <activity android:name="FileLoader"></activity>
+        <activity android:name="FileLoaderSD"></activity>
         <activity android:name="WordTestMenu"></activity>
         <activity android:name="Hangman"></activity>
         <activity android:name="KanjiTester"></activity>
@@ -23,6 +23,8 @@
         <activity android:name="WordViewer"></activity>
         <activity android:name="KanjiWriter"></activity>
         <activity android:name="KanjiWriteMenu"></activity>
+        <activity android:name="FileLoader"></activity>
+        <activity android:name="FileLoaderInt"></activity>
     </application>
 
 </manifest>

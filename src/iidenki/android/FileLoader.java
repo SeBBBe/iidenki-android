@@ -1,120 +1,78 @@
 package iidenki.android;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-
-import control.GameHandler;
-
-import vocab.Word;
-
-import android.app.ListActivity;
+import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TabHost;
 
-public class FileLoader extends ListActivity implements OnItemClickListener{
+public class FileLoader extends TabActivity{
 	
 	private String next;
 	
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		next = getIntent().getStringExtra("next");
-		  
-		File root = Environment.getExternalStorageDirectory(); //fetch the external storage dir
-		File[] listOfFiles = root.listFiles();
-	
-		boolean error = false;
-		try{
-			setListAdapter(new ArrayAdapter<File>(this, R.layout.list_item, listOfFiles));
-		}catch (Exception e){
-			Toast.makeText(getApplicationContext(), "You need to insert an SD card to load files!", Toast.LENGTH_SHORT).show();
-			error = true;
-			finish();
-		}
-	
-		if (!error){
-			ListView lv = getListView();
-			lv.setTextFilterEnabled(true);
-			lv.setOnItemClickListener(this);
-		}
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.fileloader);
+	    next = getIntent().getStringExtra("next");
+
+	    Resources res = getResources(); // Resource object to get Drawables
+	    TabHost tabHost = getTabHost();  // The activity TabHost
+	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
+	    Intent intent;  // Reusable Intent for each tab
+
+	    // Create an Intent to launch an Activity for the tab (to be reused)
+	    intent = new Intent().setClass(this, FileLoaderInt.class);
+	    transfer(intent);
+
+	    // Initialize a TabSpec for each tab and add it to the TabHost
+	    spec = tabHost.newTabSpec("artists").setIndicator("Included",
+	                      res.getDrawable(R.drawable.int_icon))
+	                  .setContent(intent);
+	    tabHost.addTab(spec);
+
+	    // Do the same for the other tabs
+	    intent = new Intent().setClass(this, FileLoaderSD.class);
+	    transfer(intent);
+	    spec = tabHost.newTabSpec("albums").setIndicator("SD card",
+	                      res.getDrawable(R.drawable.sd_icon))
+	                  .setContent(intent);
+	    tabHost.addTab(spec);
+
+	    tabHost.setCurrentTab(0);
 	}
-	
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		String fil = (String) ((TextView) arg1).getText();
-		
+
+	private void transfer(Intent intent) {
+		intent.putExtra("next", next);
 		if (next.equals("WordTester")){
 			String testtype = getIntent().getStringExtra("test type");
 			String wordclass = getIntent().getStringExtra("test word class");
 			String reset = getIntent().getStringExtra("reset list");
 			String num = getIntent().getStringExtra("number");
-			
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, WordTester.class.getName());
-		    intent.putExtra("file",fil);
 		    intent.putExtra("test type",testtype);
 			intent.putExtra("test word class",wordclass);
 			intent.putExtra("reset list",reset);
 			intent.putExtra("number",num);
-			startActivity(intent);
-			finish();
 		}else if(next.equals("Hangman")){
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, Hangman.class.getName());
-		    intent.putExtra("file",fil);
-			startActivity(intent);
-			finish();
 		}else if(next.equals("KanjiTester")){
 			String testtype = getIntent().getStringExtra("test type");
 			String reset = getIntent().getStringExtra("reset list");
 			String num = getIntent().getStringExtra("number");
 			String speed = getIntent().getStringExtra("speed");
-			
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, KanjiTester.class.getName());
-		    intent.putExtra("file",fil);
 		    intent.putExtra("test type",testtype);
 			intent.putExtra("reset list",reset);
 			intent.putExtra("number",num);
 			intent.putExtra("speed",speed);
-			startActivity(intent);
-			finish();
 		}else if(next.equals("KanjiWriter")){
 			String testtype = getIntent().getStringExtra("test type");
 			String reset = getIntent().getStringExtra("reset list");
 			String num = getIntent().getStringExtra("number");
 			String speed = getIntent().getStringExtra("speed");
-			
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, KanjiWriter.class.getName());
-		    intent.putExtra("file",fil);
 		    intent.putExtra("test type",testtype);
 			intent.putExtra("reset list",reset);
 			intent.putExtra("number",num);
 			intent.putExtra("speed",speed);
-			startActivity(intent);
-			finish();
 		}else if(next.equals("KanjiViewer")){
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, KanjiViewer.class.getName());
-		    intent.putExtra("file",fil);
-			startActivity(intent);
-			finish();
 		}else if(next.equals("WordViewer")){
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, WordViewer.class.getName());
-		    intent.putExtra("file",fil);
-			startActivity(intent);
-			finish();
 		}
-		
 	}
 }

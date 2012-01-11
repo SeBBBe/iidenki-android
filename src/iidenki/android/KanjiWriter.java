@@ -1,13 +1,12 @@
 package iidenki.android;
 
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import control.FileManager;
 
 import vocab.DynamicTest;
 import vocab.Kanji;
@@ -41,7 +40,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 	private ArrayList<Kanji> list; 
 	private int correct;
 	private int total;
-	private File readfrom;
+	private String readfrom;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,54 +52,62 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		String reset = getIntent().getStringExtra("reset list");
 		String num = getIntent().getStringExtra("number");
     	
-    	readfrom = new File(fil);
+    	readfrom = fil;
     	list = null;
     	
     	boolean error = false;
     	try{
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ObjectInputStream in=FileManager.getInStream(this, readfrom);
 			list =(ArrayList<Kanji>)in.readObject();
 			in.close();
 		}catch(Exception e){
+			error = true;
 			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "You need to select an iidenki kanji list file", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "Download such a file or create one using iidenki on your computer", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), "then place it on the root of your phone memory card", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			finish();
-			error = true;
 		}
 	    
-    	if (reset.equals("true")){
-    		resetList(list);
+    	if (!error){
+	    	if (reset.equals("true")){
+	    		resetList(list);
+	    	}
+	    	
+	    	if (testtype.equals("Test all kanji")){
+	    		test = new SimpleTest<Kanji>(list);
+	    	}
+	    	if (testtype.equals("Test the most difficult kanji")){
+	    		test = new DynamicTest<Kanji>(list, num);
+	    	}
+	    	if (testtype.equals("Test the latest kanji")){
+	    		test = new LatestTest<Kanji>(list, num);
+	    	}
+	    	
+		    Button b = (Button) findViewById(R.id.button1);
+	    	b.setOnClickListener(this);
+	    	b = (Button) findViewById(R.id.button2);
+	    	b.setOnClickListener(this);
+	    	b = (Button) findViewById(R.id.button3);
+	    	b.setOnClickListener(this);
+		    
+		    initPadView();
+		    newRound();
     	}
-    	
-    	if (testtype.equals("Test all kanji")){
-    		test = new SimpleTest<Kanji>(list);
-    	}
-    	if (testtype.equals("Test the most difficult kanji")){
-    		test = new DynamicTest<Kanji>(list, num);
-    	}
-    	if (testtype.equals("Test the latest kanji")){
-    		test = new LatestTest<Kanji>(list, num);
-    	}
-    	
-	    Button b = (Button) findViewById(R.id.button1);
-    	b.setOnClickListener(this);
-    	b = (Button) findViewById(R.id.button2);
-    	b.setOnClickListener(this);
-    	b = (Button) findViewById(R.id.button3);
-    	b.setOnClickListener(this);
-	    
-	    run();
-	    newRound();
 	}
 	
 	private void newRound() {
 		currentkanji = new Kanji("temp");
 		int i = 0;
 		while (currentkanji.toString().length() != 1){
-			currentkanji = test.getNext();
+			try{
+				currentkanji = test.getNext();
+			}catch(Exception e){
+				Toast.makeText(getApplicationContext(), "Wrong type of file!", Toast.LENGTH_SHORT).show();
+				finish();
+				return;
+			}
 			i++;
 			if (i > list.size()){
 				currentkanji = null;
@@ -109,13 +116,6 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		}
 		
 		if (currentkanji == null){
-			try{
-				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(readfrom));
-				out.writeObject(list);
-			}catch(Exception f){
-				Log.e("", "", f);
-				Toast.makeText(getApplicationContext(), "File error! Scores not saved.", Toast.LENGTH_SHORT).show();
-			}
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
 			finish();
@@ -125,7 +125,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		}
 	}
 	
-	 public void run() {
+	 public void initPadView() {
          // Inits the strokes dictionaries
 	        InputStream dataFile = getResources().openRawResource(R.raw.jdata);
 	        //InputStream dataFile = getResources().openRawResource(R.raw.jdata_test);

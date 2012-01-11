@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import control.FileManager;
 import control.GameHandler;
 
 import vocab.Kanji;
@@ -28,17 +29,18 @@ public class WordViewer extends ListActivity implements OnItemClickListener{
 	
 	private String next;
 	ArrayList<Word> list;
+	private String readfrom;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String fil = getIntent().getStringExtra("file");
 	  
-		File readfrom = new File(fil);
+		readfrom = fil;
     	list = null;
     	
     	boolean error = false;
     	try{
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ObjectInputStream in=FileManager.getInStream(this, readfrom);
 			list =(ArrayList<Word>)in.readObject();
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();
@@ -50,7 +52,14 @@ public class WordViewer extends ListActivity implements OnItemClickListener{
 			error = true;
 		}
     	
-    	Word[] textlist = makeTextlist(list);
+    	Word[] textlist = null;
+    	try{
+    		textlist = makeTextlist(list);
+    	}catch(Exception e){
+			Toast.makeText(getApplicationContext(), "Wrong type of file!", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		
     	if (!error){
 			setListAdapter(new ArrayAdapter<Word>(this, R.layout.list_item, textlist));
