@@ -87,6 +87,21 @@ public class FileLoader extends ListActivity implements OnItemClickListener{
 			intent.putExtra("speed",speed);
 			startActivity(intent);
 			finish();
+		}else if(next.equals("KanjiWriter")){
+			String testtype = getIntent().getStringExtra("test type");
+			String reset = getIntent().getStringExtra("reset list");
+			String num = getIntent().getStringExtra("number");
+			String speed = getIntent().getStringExtra("speed");
+			
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, KanjiWriter.class.getName());
+		    intent.putExtra("file",fil);
+		    intent.putExtra("test type",testtype);
+			intent.putExtra("reset list",reset);
+			intent.putExtra("number",num);
+			intent.putExtra("speed",speed);
+			startActivity(intent);
+			finish();
 		}else if(next.equals("KanjiViewer")){
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setClassName(this, KanjiViewer.class.getName());

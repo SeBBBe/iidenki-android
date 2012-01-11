@@ -22,6 +22,7 @@
         <activity android:name="KanjiViewer"></activity>
         <activity android:name="WordViewer"></activity>
         <activity android:name="KanjiWriter"></activity>
+        <activity android:name="KanjiWriteMenu"></activity>
     </application>
 
 </manifest>

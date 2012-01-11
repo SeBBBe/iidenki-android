@@ -38,6 +38,12 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
     	sb.setOnSeekBarChangeListener(new SeekListen(this));
     	sb.setProgress(50);
     	speed = 50;
+    	
+    	if (!getNext().equals("KanjiTester")){
+    		sb.setVisibility(View.INVISIBLE);
+    		TextView t = (TextView) findViewById(R.id.textView3);
+    		t.setVisibility(View.INVISIBLE);
+    	}
 	}
 	
 	/**
@@ -57,9 +63,13 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
 		intent.putExtra("reset list",reset);
 		intent.putExtra("number",num);
 		intent.putExtra("speed",speed + "");
-		intent.putExtra("next", "KanjiTester");
+		intent.putExtra("next", getNext());
 		startActivity(intent);
 		finish();
+	}
+	
+	public String getNext(){
+		return "KanjiTester";
 	}
 	
 	private class SeekListen implements OnSeekBarChangeListener{

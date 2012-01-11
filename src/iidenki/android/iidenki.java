@@ -71,7 +71,7 @@ public class iidenki extends Activity implements OnClickListener {
 		}
 		if (src == kanjiwritebutton){
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setClassName(this, KanjiWriter.class.getName());
+			intent.setClassName(this, KanjiWriteMenu.class.getName());
 			startActivity(intent);
 		}
 	}

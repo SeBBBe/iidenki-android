@@ -4,3 +4,8 @@ developed by Sebastian Fabian
 requirements: android version 2.1 or newer
 
 released under the GNU GENERAL PUBLIC LICENSE Version 3 (GPLv3)
+
+Kanji recognition adapted from Kanji Writing Game by Abraham Macias Paredes (released under GPLv3)
+Derived from prior work by Robert E. Wells on JStroke.
+Derived from prior work by Todd David Rudick on JavaDict and StrokeDic.
+Makes use of KANJIDIC data from Jim Breen of Monash University
