@@ -176,6 +176,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		}
 		
 		if (src == skipbutton){
+			showAnswerDialog();
 			newRound();
 		}
 		
@@ -201,17 +202,21 @@ public class KanjiWriter extends Activity implements OnClickListener{
 			total++;
 			newRound();
 		}else{
-			AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-            alertbox.setMessage("wrong! the answer was\n" + currentkanji.toString() + "\nreading: " + currentkanji.reading + "\nmeaning: " + currentkanji.translation);
-            alertbox.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                }
-            });
-            alertbox.show();
+			showAnswerDialog();
 			test.fail();
 			total++;
 			newRound();
 		}
+	}
+
+	private void showAnswerDialog() {
+		AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+		alertbox.setMessage("the answer was\n" + currentkanji.toString() + "\nreading: " + currentkanji.reading + "\nmeaning: " + currentkanji.translation);
+		alertbox.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface arg0, int arg1) {
+		    }
+		});
+		alertbox.show();
 	}
 	
 	/**
