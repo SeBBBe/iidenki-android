@@ -15,9 +15,9 @@ import android.util.Log;
  * 
  * GNU GPL v3.<br>
  * ... y al mismo que me condena,<br>
- * colgaré de alguna antena,<br>
- * quizá; en su propio navío.<br>
- * (José de Espronceda)<br>
+ * colgarï¿½ de alguna antena,<br>
+ * quizï¿½; en su propio navï¿½o.<br>
+ * (Josï¿½ de Espronceda)<br>
  * <br>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -54,7 +54,7 @@ public class StrokeScorer {
 	
 	
 	/** Stroke dictionary */
-	protected String[] strokeDic;
+	protected String[] strokeDic; //list of char arrays, first char in each array is the kanji
 	
 	/** Raw strokes */
 	protected RawStroke[] rawStrokes;
