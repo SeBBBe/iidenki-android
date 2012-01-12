@@ -1,9 +1,7 @@
 package iidenki.android;
 
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import control.FileManager;
@@ -24,7 +22,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.PadView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,11 +38,13 @@ public class KanjiWriter extends Activity implements OnClickListener{
 	private int correct;
 	private int total;
 	private String readfrom;
+	private boolean couldnt;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	    setContentView(R.layout.kanjiwriter);
+	    couldnt = false;
 	    
 	    String fil = getIntent().getStringExtra("file");
 	    String testtype = getIntent().getStringExtra("test type");
@@ -101,7 +100,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		PadView padView = (PadView) findViewById(R.id.padView);
 		boolean iid = padView.isInDict(k);
 		if (!iid){
-			Toast.makeText(getApplicationContext(), "Sorry! The kanji " + k + " cannot be tested because it's not in the stroke dictionary!", Toast.LENGTH_SHORT).show();
+			couldnt = true;
 		}
 		return iid;
 	}
@@ -127,7 +126,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		if (currentkanji == null){
 			Toast.makeText(getApplicationContext(), "end of quiz!", Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), correct + " correct out of " + total, Toast.LENGTH_SHORT).show();
-			finish();
+			if (couldnt) {showCouldntDialog();}else{finish();}
 		}else{
 			TextView exp = (TextView) findViewById(R.id.textView2);
 			exp.setText("meaning: " + currentkanji.translation + " reading: " + currentkanji.reading);
@@ -185,8 +184,9 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		}
 		
 		if (src == skipbutton){
+			total++;
 			test.success();
-			showAnswerDialog();
+			//showAnswerDialog();
 			newRound();
 		}
 		
@@ -224,6 +224,17 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		alertbox.setMessage("the answer was\n" + currentkanji.toString() + "\nreading: " + currentkanji.reading + "\nmeaning: " + currentkanji.translation);
 		alertbox.setNeutralButton("OK", new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface arg0, int arg1) {
+		    }
+		});
+		alertbox.show();
+	}
+	
+	private void showCouldntDialog() {
+		AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+		alertbox.setMessage("Some of the kanji in this test could not be presented because they weren't in the stroke database!");
+		alertbox.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface arg0, int arg1) {
+		    	finish();
 		    }
 		});
 		alertbox.show();
