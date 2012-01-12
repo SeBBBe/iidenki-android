@@ -44,9 +44,6 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
     		TextView t = (TextView) findViewById(R.id.textView3);
     		t.setVisibility(View.INVISIBLE);
     	}
-    	
-    	CheckBox cb = (CheckBox) findViewById(R.id.checkBox2); //hide reset checkbox
-    	cb.setVisibility(View.INVISIBLE);
 	}
 	
 	/**
@@ -55,8 +52,9 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
 	public void onClick(View arg0) {
 		Spinner spin = (Spinner) findViewById(R.id.spinner1);
 		String testtype = (String) spin.getSelectedItem();
-		CheckBox cb = (CheckBox) findViewById(R.id.checkBox2);
-		String reset = cb.isChecked() ? "true" : "false";
+		//CheckBox cb = (CheckBox) findViewById(R.id.checkBox2);
+		//String reset = cb.isChecked() ? "true" : "false";
+		String reset = "false";
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String num = et.getText().toString();
 		

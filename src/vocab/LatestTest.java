@@ -25,7 +25,7 @@ public class LatestTest<E extends RightWrong> implements Tester{
 			n = Integer.parseInt(num);
 		}catch (Exception e){
 			//JOptionPane.showMessageDialog(null, "Invalid value. Will test 10 words.");
-			n = 1;
+			n = 10;
 		}
 		if (n > wlist.size()){
 			//JOptionPane.showMessageDialog(null, "The number is larger than the size of the list! All words will be tested.");

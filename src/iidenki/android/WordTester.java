@@ -90,8 +90,8 @@ public class WordTester extends Activity implements OnClickListener{
 	    		resetList(list);
 	    	}
 	    	
-	    	if (testtype.equals("Test all words")){
-	    		test = new SimpleTest<Word>(list);
+	    	if (testtype.equals("Test random words")){
+	    		test = new SimpleTest<Word>(list, num);
 	    	}
 	    	if (testtype.equals("Test the most difficult words")){
 	    		test = new DynamicTest<Word>(list, num);

@@ -33,9 +33,6 @@ public class WordTestMenu extends Activity implements OnClickListener{
     	
     	CheckBox cb = (CheckBox) findViewById(R.id.checkBox1);
     	cb.setChecked(true);
-    	
-    	cb = (CheckBox) findViewById(R.id.checkBox2); //hide reset checkbox
-    	cb.setVisibility(View.INVISIBLE);
 	}
 	
 	/**
@@ -46,8 +43,9 @@ public class WordTestMenu extends Activity implements OnClickListener{
 		String testtype = (String) spin.getSelectedItem();
 		CheckBox cb = (CheckBox) findViewById(R.id.checkBox1);
 		String wordclass = cb.isChecked() ? "true" : "false";
-		cb = (CheckBox) findViewById(R.id.checkBox2);
-		String reset = cb.isChecked() ? "true" : "false";
+		//cb = (CheckBox) findViewById(R.id.checkBox2);
+		//String reset = cb.isChecked() ? "true" : "false";
+		String reset = "false";
 		EditText et = (EditText) findViewById(R.id.editText1);
 		String num = et.getText().toString();
 		

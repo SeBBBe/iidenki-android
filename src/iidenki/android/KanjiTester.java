@@ -80,8 +80,8 @@ public class KanjiTester extends Activity implements OnClickListener{
 	    		resetList(list);
 	    	}
 	    	
-	    	if (testtype.equals("Test all kanji")){
-	    		test = new SimpleTest<Kanji>(list);
+	    	if (testtype.equals("Test random kanji")){
+	    		test = new SimpleTest<Kanji>(list, num);
 	    	}
 	    	if (testtype.equals("Test the most difficult kanji")){
 	    		test = new DynamicTest<Kanji>(list, num);
