@@ -33,6 +33,9 @@ public class WordTestMenu extends Activity implements OnClickListener{
     	
     	CheckBox cb = (CheckBox) findViewById(R.id.checkBox1);
     	cb.setChecked(true);
+    	
+    	cb = (CheckBox) findViewById(R.id.checkBox2); //hide reset checkbox
+    	cb.setVisibility(View.INVISIBLE);
 	}
 	
 	/**

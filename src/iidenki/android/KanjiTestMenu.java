@@ -44,6 +44,9 @@ public class KanjiTestMenu extends Activity implements OnClickListener{
     		TextView t = (TextView) findViewById(R.id.textView3);
     		t.setVisibility(View.INVISIBLE);
     	}
+    	
+    	CheckBox cb = (CheckBox) findViewById(R.id.checkBox2); //hide reset checkbox
+    	cb.setVisibility(View.INVISIBLE);
 	}
 	
 	/**
