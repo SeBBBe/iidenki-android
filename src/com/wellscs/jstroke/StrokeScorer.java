@@ -54,7 +54,7 @@ public class StrokeScorer {
 	
 	
 	/** Stroke dictionary */
-	protected String[] strokeDic; //list of char arrays, first char in each array is the kanji
+	protected String[] strokeDic; //list of string, first char in each string is the kanji
 	
 	/** Raw strokes */
 	protected RawStroke[] rawStrokes;
@@ -86,6 +86,15 @@ public class StrokeScorer {
 			this.scoreItems[i] = new ScoreItem();
 		}
 		this.pathData = new byte[DATA_BUF_LEN];
+	}
+	
+	public boolean isInDict(char k){
+		for (String s : strokeDic){
+			if (s.charAt(0) == k){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/** Process the database entries in order to find a matching kanji */

@@ -97,10 +97,19 @@ public class KanjiWriter extends Activity implements OnClickListener{
     	}
 	}
 	
+	private boolean isInDict(char k){
+		PadView padView = (PadView) findViewById(R.id.padView);
+		boolean iid = padView.isInDict(k);
+		if (!iid){
+			Toast.makeText(getApplicationContext(), "Sorry! The kanji " + k + " cannot be tested because it's not in the stroke dictionary!", Toast.LENGTH_SHORT).show();
+		}
+		return iid;
+	}
+	
 	private void newRound() {
 		currentkanji = new Kanji("temp");
 		int i = 0;
-		while (currentkanji.toString().length() != 1){
+		while (currentkanji.toString().length() != 1 || !isInDict(currentkanji.toString().charAt(0))){
 			try{
 				currentkanji = test.getNext();
 			}catch(Exception e){

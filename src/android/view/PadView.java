@@ -456,6 +456,16 @@ public class PadView extends View {
 		return str;
 		
 	}
+	
+	public boolean isInDict(char k){
+		StrokeScorer scorer;
+		for (int i = 1; i < MAX_STROKES; i++){
+			if (stroke_dicts[i] == null){return false;}
+			scorer = new StrokeScorer(stroke_dicts[i], strokes, currentStroke);
+			if (scorer.isInDict(k)){return true;}
+		}
+		return false;
+	}
 
 	public static BitmapDrawable getPaintbush() {
 		return paintbush;
