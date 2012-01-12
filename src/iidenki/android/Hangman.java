@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+
+import control.FileManager;
 import control.GameHandler;
 import vocab.Word;
 import iidenki.android.R;
@@ -31,12 +33,12 @@ public class Hangman extends Activity implements OnClickListener{
 	    level = 1;
 	    
 	    String fil = getIntent().getStringExtra("file");
-	    File readfrom = new File(fil);
+	    String readfrom = fil;
 	    ArrayList<Word> temp = null;
 	    boolean error = false;
     	
     	try{
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(readfrom));
+			ObjectInputStream in=FileManager.getInStream(this, readfrom);
 			temp =(ArrayList<Word>)in.readObject();
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Invalid file!", Toast.LENGTH_SHORT).show();

@@ -49,10 +49,9 @@ public final class R {
         public static final int button2=0x7f070011;
         public static final int button3=0x7f070012;
         public static final int button4=0x7f070016;
-        public static final int button5=0x7f070017;
         public static final int button6=0x7f070014;
         public static final int buttonsArea=0x7f070013;
-        public static final int checkBox1=0x7f070018;
+        public static final int checkBox1=0x7f070017;
         public static final int checkBox2=0x7f07000d;
         public static final int editText1=0x7f070005;
         public static final int hangmanButton=0x7f070015;

@@ -56,7 +56,10 @@ public class KanjiViewer extends ListActivity implements OnItemClickListener{
     	try{
     		textlist = makeTextlist(list);
     	}catch(Exception e){
-			Toast.makeText(getApplicationContext(), "Wrong type of file!", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setClassName(this, WordViewer.class.getName());
+		    intent.putExtra("file",fil);
+			startActivity(intent);
 			finish();
 			return;
 		}

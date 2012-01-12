@@ -10,6 +10,7 @@ import control.GameHandler;
 import vocab.Word;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class FileLoaderSD extends ListActivity implements OnItemClickListener{
 	}
 	
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		ProgressDialog dialog = ProgressDialog.show(this, "", 
+                "Loading. Please wait...", true);
 		String fil = (String) ((TextView) arg1).getText();
 		
 		if (next.equals("WordTester")){

@@ -176,6 +176,7 @@ public class KanjiWriter extends Activity implements OnClickListener{
 		}
 		
 		if (src == skipbutton){
+			test.success();
 			showAnswerDialog();
 			newRound();
 		}
